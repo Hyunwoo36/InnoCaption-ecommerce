@@ -1,3 +1,7 @@
+# InnoCaption-ecommerce
+
+This is a react project to apply at InnoCaption.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
