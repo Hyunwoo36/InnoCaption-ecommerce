@@ -9,47 +9,35 @@ import CartSidebar from './components/CartSideBar';
 
 function App() {
 
-  const [showProducts, setShowProducts] = useState(false);
+  const [showProductList, setShowProductList] = useState(false);
   const [showCart, setShowCart] = useState(false);
 
-  const [cartItems, setCartItems] = useState([
-    { id: 1, title: 'Product 1', quantity: 2, price: 10.99 }
-  ]);
-
-  const updateQuantity = (itemId, quantity) => {
-    const updatedCartItems = cartItems.map(item =>
-      item.id === itemId ? { ...item, quantity: quantity } : item
-    );
-    setCartItems(updatedCartItems);
-  };
-
-  const deleteItem = (itemId) => {
-    const updatedCartItems = cartItems.filter(item => item.id !== itemId);
-    setCartItems(updatedCartItems);
-  };
+  const [cartProducts, setCartProducts] = useState([]);
 
   return (
     <Container>
       <Header
-        showProducts={showProducts}
-        setShowProducts={setShowProducts}
+        showProductList={showProductList}
+        setShowProductList={setShowProductList}
         showCart={showCart}
         setShowCart={setShowCart}
       />
       <CartSidebar
         showCart={showCart}
         setShowCart={setShowCart}
-        cartItems={cartItems}
-        updateQuantity={updateQuantity}
-        deleteItem={deleteItem}
+        cartItems={cartProducts}
+        setCartItems={setCartProducts}
       />
 
-      {!showProducts ? (
+      {!showProductList ? (
         <div className='landing-image-container'>
           <img src={landingPageImg} alt="landing" className="landing-image" />
         </div>
       ) : (
-        <ProductList />
+        <ProductList
+          setCartProducts={setCartProducts}
+          cartProducts={cartProducts}
+        />
       )}
 
     </Container>

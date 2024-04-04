@@ -4,10 +4,25 @@ import { Card, Button, Container, Row, Col, Pagination } from 'react-bootstrap';
 
 import '../App.css';
 
-function ProductList() {
+function ProductList({ setCartProducts, cartProducts }) {
     const [products, setProducts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(0);
+
+    // fake apis
+
+    async function addToCart(product) {
+        try {
+            const res = await axios.post(`https://dummyjson.com/products/add`, { product });
+            if (res.status === 200) {
+                // update the cart
+                setCartProducts(current => [...current, { ...product, quantity: 1 }]);
+                console.log('Product Added to Cart: ');
+            }
+        } catch (e) {
+            console.log("Error occured when add to cart:", e);
+        }
+    }
 
     useEffect(() => {
         const productsPerPage = 12; // 4 products per row, 3 rows
@@ -42,7 +57,11 @@ function ProductList() {
                                 <Card.Title>{product.title}</Card.Title>
                                 <div className='flex-row'>
                                     <Card.Text className='bold'>${product.price}</Card.Text>
-                                    <Button variant="primary">Add to Cart</Button>
+                                    {cartProducts.some(cartItem => cartItem.id === product.id) ? (
+                                        <Button variant="success" disabled>Added ✓</Button>
+                                    ) : (
+                                        <Button variant="primary" onClick={() => addToCart(product)}>Add to Cart</Button>
+                                    )}
                                 </div>
                             </Card.Body>
                         </Card>
