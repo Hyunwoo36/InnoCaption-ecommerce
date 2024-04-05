@@ -55,7 +55,7 @@ function ProductList({ setCartProducts, cartProducts }) {
                             <Card.Img variant="top" src={product.thumbnail} className='product-card-img' />
                             <Card.Body>
                                 <Card.Title>{product.title}</Card.Title>
-                                <div className='flex-row'>
+                                <div className='flex-row2'>
                                     <Card.Text className='bold'>${product.price}</Card.Text>
                                     {cartProducts.some(cartItem => cartItem.id === product.id) ? (
                                         <Button variant="success" disabled>Added ✓</Button>

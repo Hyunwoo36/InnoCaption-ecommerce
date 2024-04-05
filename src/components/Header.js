@@ -6,16 +6,22 @@ import CartIcon from '../assets/icon/cart.png';
 function Header({ showProductList, setShowProductList, showCart, setShowCart }) {
     return (
         <div className="header">
-            <div className="logo">
+            <div className="logo" onClick={() => {
+                setShowProductList(false);
+                setShowCart(false);
+            }}>
                 <img src={logo} alt='Logo' style={{ maxWidth: '20rem', height: 'auto' }} />
             </div>
             <div style={{ display: 'flex' }}>
                 {showProductList ?
-                    <img
-                        src={CartIcon}
-                        alt="cartImg"
-                        className='cartImg'
-                        onClick={() => setShowCart(!showCart)} />
+                    <div className='centeringCart' onClick={() => setShowCart(!showCart)}>
+                        <img
+                            src={CartIcon}
+                            alt="cartImg"
+                            className='cartImg'
+                        />
+                        <div className='myCartTxt'>My Cart</div>
+                    </div>
                     : <></>
                 }
 
